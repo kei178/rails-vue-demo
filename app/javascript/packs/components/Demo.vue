@@ -1,22 +1,51 @@
 <template>
   <div>
-    <p>{{ message }}</p>
+    <button @click="fetchProducts()">Fetch Products</button>
+    <button @click="deleteProducts()">Delete Products</button>
+    <hr>
+    <template v-if="productsPresent">
+      <ul>
+      　　<li v-for="product in products">
+            {{ product.id }}: {{ product.name }}
+          </li>
+      </ul>
+    </template>
+    <template v-else>
+      <p>Please fetch your products.</p>
+    </template>
   </div>
 </template>
 
 <script>
-  export default {
+    import axios from 'axios'
+    axios.defaults.headers.get["Accepts"] = 'application/json'
+
+    export default {
     data: function () {
       return {
-        message: "Demo World!"
+        products: []
+      }
+    },
+    computed: {
+      productsPresent() {
+        return this.products.length > 0
+      }
+    },
+    methods:{
+      fetchProducts() {
+        axios.get('/api/v1/products', {
+          params: {}
+        })
+        .then(res => {
+          this.products = res.data['products']
+        })
+      },
+      deleteProducts() {
+        this.products = []
       }
     }
   }
 </script>
 
 <style scoped>
-  p {
-    font-size: 2em;
-    text-align: center;
-  }
 </style>

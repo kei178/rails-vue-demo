@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-// axios
-import axios from 'axios'
-
 // vue-router
 import VueRouter from 'vue-router'
 import { routes } from './routes'
@@ -26,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = new Vue({
         el,
         router,
-        axios,
         render: h => h(App)
     })
 })
