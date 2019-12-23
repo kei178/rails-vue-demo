@@ -1,5 +1,9 @@
 <template>
   <div>
+    <span>Count: {{ $store.state.counter }}</span>
+    <button @click="increment()">Count Up</button>
+    <button @click="reset()">Reset</button>
+    <hr>
     <button @click="fetchProducts()">Fetch Products</button>
     <button @click="deleteProducts()">Delete Products</button>
     <hr>
@@ -31,7 +35,7 @@
         return this.products.length > 0
       }
     },
-    methods:{
+    methods: {
       fetchProducts() {
         axios.get('/api/v1/products', {
           params: {}
@@ -42,6 +46,12 @@
       },
       deleteProducts() {
         this.products = []
+      },
+      increment() {
+        this.$store.commit("increment");
+      },
+      reset() {
+        this.$store.commit("reset");
       }
     }
   }
