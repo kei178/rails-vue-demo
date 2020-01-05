@@ -1,0 +1,37 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: rails_vue_demo_development
+    ports:
+      - "3307:3306"
+
+  webpacker:
+    build: .
+    command: bundle exec bin/webpack-dev-server
+    volumes:
+      - .:/rails-vue-demo
+    ports:
+      - "8080:8080"
+
+  web:
+    build: .
+    command: ./bin/server
+    volumes:
+      - ".:/rails-vue-demo"
+      - "./config/docker/database.yml:/app/config/database.yml"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - webpacker
+    tty: true
+    environment:
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_PORT: 3306
+      DB_HOST: db
+      RAILS_MAX_THREADS: 5
+      RAILS_ENV: development
