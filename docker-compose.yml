@@ -8,14 +8,6 @@ services:
     ports:
       - "3307:3306"
 
-  webpacker:
-    build: .
-    command: bundle exec bin/webpack-dev-server
-    volumes:
-      - .:/rails-vue-demo
-    ports:
-      - "8080:8080"
-
   web:
     build: .
     command: ./bin/server
@@ -26,7 +18,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      - webpacker
     tty: true
     environment:
       DB_USERNAME: root
