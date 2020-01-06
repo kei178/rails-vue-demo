@@ -11,7 +11,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: ./bin/server
+    command: ./bin/server-dev
     volumes:
       - ".:/rails-vue-demo"
       - "./config/docker/database.yml:/app/config/database.yml"
