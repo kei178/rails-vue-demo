@@ -4,7 +4,6 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: rails_vue_demo_development
     ports:
       - "3307:3306"
 
