@@ -1,0 +1,6 @@
+syncs:
+  app_sync_volume:
+    sync_excludes: ['.gitignore', '.git/', 'tmp/*']
+    src: './'
+    dest: '/app'
+    sync_strategy: 'unison'
