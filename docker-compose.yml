@@ -8,7 +8,9 @@ services:
       - "3307:3306"
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     command: ./bin/server
     volumes:
       - ".:/rails-vue-demo"
