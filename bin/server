@@ -1,0 +1,4 @@
+#!/bin/bash -i
+
+echo 'precompiling assets'
+RAILS_ENV=production bundle exec rake assets:precompile

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3307:3306"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ./bin/server-dev
+    volumes:
+      - ".:/rails-vue-demo"
+      - "./config/docker/database.yml:/app/config/database.yml"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    tty: true
+    environment:
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_PORT: 3306
+      DB_HOST: db
+      RAILS_MAX_THREADS: 5
+      RAILS_ENV: development
