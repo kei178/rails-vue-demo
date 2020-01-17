@@ -47,7 +47,7 @@ You can access the server at `http://localhost`.
 If you change something, execute the following command, instead:
 
 ```
-docker-compose -f docker-compose-prod.yml up
+docker-compose -f docker-compose-prod.yml up --build
 ```
 
 ### Shutdown
