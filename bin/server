@@ -1,4 +1,24 @@
 #!/bin/bash -i
 
-echo 'precompiling assets'
-RAILS_ENV=production bundle exec rake assets:precompile
+# Wait for MySQL
+until nc -z -v -w30 $DB_HOST $DB_PORT; do
+ echo 'Waiting for MySQL...'
+ sleep 1
+done
+echo "MySQL is up and running!"
+
+# If the database exists, migrate. Otherwise setup (create and migrate)
+bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
+
+# If the container has been killed, there may be a stale pid file
+# preventing rails from booting up
+rm -f tmp/pids/server.pid
+
+# Apply assets:precompile if production
+RAILS_ENV=production bundle exec rails assets:precompile
+
+# To solve: `Refused to execute script...`
+# XXX It didn't work with the env var setting in docker-compose.yml
+export RAILS_SERVE_STATIC_FILES=true
+
+bundle exec rails s -p 3000 -b '0.0.0.0'

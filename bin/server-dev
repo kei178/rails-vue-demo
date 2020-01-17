@@ -14,4 +14,7 @@ bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
 # preventing rails from booting up
 rm -f tmp/pids/server.pid
 
+# To solve: `error Command "webpack-dev-server" not found.`
+yarn add webpack-dev-server
+
 bundle exec foreman start -f Procfile.dev

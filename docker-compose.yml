@@ -7,10 +7,12 @@ services:
     ports:
       - "3307:3306"
 
-  web:
+  app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      args:
+        precompileassets: 'false'
+      dockerfile: Dockerfile
     command: ./bin/server-dev
     volumes:
       - ".:/rails-vue-demo"
