@@ -1,24 +1,57 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A dockerlized demo app with Rails and Vue.js.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
 
-* System dependencies
+## Development
 
-* Configuration
+Puma + Webpack Dev Server + MySQL
 
-* Database creation
+### Run
 
-* Database initialization
+```
+docker-compose up
+```
 
-* How to run the test suite
+You can access the server at `http://localhost:3000`.
 
-* Services (job queues, cache servers, search engines, etc.)
+If you change something, execute the following command, instead:
 
-* Deployment instructions
+```
+docker-compose up --build
+```
 
-* ...
+### Shutdown
+
+```
+docker-compose down
+```
+
+## Production Mock
+
+Puma + Nginx + MySQL
+
+### Run
+
+```
+docker-compose -f docker-compose-prod.yml up
+```
+
+You can access the server at `http://localhost`.
+
+If you change something, execute the following command, instead:
+
+```
+docker-compose -f docker-compose-prod.yml up
+```
+
+### Shutdown
+
+```
+docker-compose down
+```
