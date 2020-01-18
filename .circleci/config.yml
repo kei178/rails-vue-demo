@@ -1,13 +1,25 @@
-version: 2.1
+version: 2
 
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.13-alpine
+      - image: docker:18.03.0-ce-git
     steps:
       - checkout
-      - run: docker-compose -f docker-compose-prod.yml up
-      - run: docker-compose exec app ./bin/rspec
+      - run:
+          name: Install docker-compose
+          command: |
+            apk --update add py2-pip
+            /usr/bin/pip2 install docker-compose
+            docker-compose --version
+      - run:
+          name: Start Container
+          command: |
+            docker-compose up -d
+            docker-compose ps
+      - run: 
+          name: Test
+          command: docker-compose exec app ./bin/rspec
       - run: docker-compose down
 
 workflows:
