@@ -3,17 +3,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:18.03.0-ce-git
+      - image: docker:19.03
     steps:
       - checkout
       - run:
           name: Install docker-compose
           command: |
             export PIP_DISABLE_PIP_VERSION_CHECK=1
-            apk add build-base
-            apk --update add py2-pip
-            /usr/bin/pip2 install docker-compose
-            docker-compose --version
+            apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make && \
+            pip install docker-compose
       - run:
           name: Start Container
           command: |
