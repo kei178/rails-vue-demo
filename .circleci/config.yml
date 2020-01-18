@@ -15,12 +15,12 @@ jobs:
       - run:
           name: Start Container
           command: |
-            docker-compose up -d
-            docker-compose ps
+            sudo docker-compose up -d
+            sudo docker-compose ps
       - run: 
           name: Test
-          command: docker-compose exec app ./bin/rs
-      - run: docker-compose down
+          command: sudo docker-compose exec app ./bin/rs
+      - run: sudo docker-compose down
 
 workflows:
   version: 2
