@@ -10,18 +10,18 @@ jobs:
           name: Install docker-compose
           command: |
             export PIP_DISABLE_PIP_VERSION_CHECK=1
-            apk add --no-cache py-pip python-dev libffi-dev openssl-dev  gcc libc-dev make && \
+            apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make && \
             pip install docker-compose
       - run:
           name: Start Container
           command: |
-            export DOCKER_HOST=localhost
+            export DOCKER_HOST=127.0.0.1
             docker-compose up -d
             docker-compose ps
       - run: 
           name: Test
-          command: sudo docker-compose exec app ./bin/rs
-      - run: sudo docker-compose down
+          command: docker-compose exec app ./bin/rs
+      - run: docker-compose down
 
 workflows:
   version: 2
