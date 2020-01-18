@@ -7,10 +7,19 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Pre-setup
+          command: |
+            export PIP_DISABLE_PIP_VERSION_CHECK=1
+            apt-get update \
+            && apt-get install -y --no-install-recommends gcc and-build-dependencies \
+            && rm -rf /var/lib/apt/lists/* \
+            && pip install cryptography \
+            && apt-get purge -y --auto-remove gcc and-build-dependencies
+      - run:
           name: Install docker-compose
           command: |
             apk --update add py2-pip
-            /usr/bin/pip2 --disable-pip-version-check install docker-compose
+            /usr/bin/pip2 install docker-compose
             docker-compose --version
       - run:
           name: Start Container
