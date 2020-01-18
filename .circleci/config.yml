@@ -10,7 +10,7 @@ jobs:
           name: Install docker-compose
           command: |
             apk --update add py2-pip
-            /usr/bin/pip2 install docker-compose
+            /usr/bin/pip2 --disable-pip-version-check install docker-compose
             docker-compose --version
       - run:
           name: Start Container
@@ -19,7 +19,7 @@ jobs:
             docker-compose ps
       - run: 
           name: Test
-          command: docker-compose exec app ./bin/rspec
+          command: docker-compose exec app ./bin/rs
       - run: docker-compose down
 
 workflows:
