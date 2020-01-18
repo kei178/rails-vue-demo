@@ -10,13 +10,14 @@ jobs:
           name: Install docker-compose
           command: |
             export PIP_DISABLE_PIP_VERSION_CHECK=1
-            apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make && \
+            apk add --no-cache py-pip python-dev libffi-dev openssl-dev  gcc libc-dev make && \
             pip install docker-compose
       - run:
           name: Start Container
           command: |
-            sudo docker-compose up -d
-            sudo docker-compose ps
+            export DOCKER_HOST=localhost
+            docker-compose up -d
+            docker-compose ps
       - run: 
           name: Test
           command: sudo docker-compose exec app ./bin/rs
