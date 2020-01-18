@@ -32,6 +32,14 @@ docker-compose up --build
 docker-compose down
 ```
 
+### Test
+
+With the running app service:
+
+```
+docker-compose exec app ./bin/rspec
+```
+
 ## Production Mock
 
 Puma + Nginx + MySQL
