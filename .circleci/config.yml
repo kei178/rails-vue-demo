@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - run: docker-compose -f docker-compose-prod.yml up
+      - run: docker-compose exec app ./bin/rspec
+      - run: docker-compose down
+
+workflows:
+  version: 2
+  continuous-deploy:
+    jobs:
+      - build
