@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Start Container
           command: |
-            export DOCKER_HOST=127.0.0.1
+            export DOCKER_HOST=127.0.0.1:3000
             docker-compose up -d
             docker-compose ps
       - run: 
