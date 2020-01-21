@@ -32,4 +32,5 @@ test:
   database: rails_vue_demo_test
 
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
