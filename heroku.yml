@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: ./bin/serve
+  web: /rails-vue-demo/bin/serve
