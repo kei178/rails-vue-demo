@@ -2,4 +2,11 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: /rails-vue-demo/bin/serve
+  web: 
+    command:
+      # Same as bin/serve
+      # XXX bin/serve cannot be executed on Heroku docker for some reason.
+      - bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
+      - RAILS_ENV=production bundle exec rails assets:precompile
+      - export RAILS_SERVE_STATIC_FILES=true
+      - bundle exec rails s -p 3000 -b '0.0.0.0'
