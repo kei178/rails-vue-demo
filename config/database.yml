@@ -11,24 +11,25 @@ default: &default
   charset: utf8mb4
   encoding: utf8mb4
   collation: utf8mb4_general_ci
+
+local: &local
   socket: /var/run/mysqld/mysqlx.sock
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
   port: <%= ENV['DB_PORT'] %>
   host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 development:
   <<: *default
+  <<: *local
   database: rails_vue_demo_development
-
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  <<: *local
   database: rails_vue_demo_test
 
 production:
-  <<: *default
-  database: rails_vue_demo_production
   url: <%= ENV['DATABASE_URL'] %>
