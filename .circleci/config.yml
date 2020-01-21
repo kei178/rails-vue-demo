@@ -1,10 +1,12 @@
-version: 2
+version: 2.1
 
+executors:
+  my-executor:
+    machine:
+      - image: circleci/classic:edge
 jobs:
   build:
-    machine:
-      image: circleci/classic:edge
-
+    machine: my-executor 
     steps:
       - checkout
       - run:
@@ -17,8 +19,37 @@ jobs:
           name: docker-compose down
           command: docker-compose down
 
+  deploy:
+    machine: my-executor
+    steps:
+      - checkout
+      - run: docker ps
+      - run:
+          name: setup heroku command
+          command: bash .circleci/setup_heroku.sh
+      - run: 
+          name: heroku maintenance on
+          command: heroku maintenance:on --web ${HEROKU_APP_NAME}
+      - run: 
+          name: push container
+          command: |
+            heroku container:push web
+            heroku container:release web
+      - run:
+          name: start server
+          command: heroku run ./bin/serve
+      - run:
+          name: heroku maintenance off
+          command: heroku maintenance:off --web ${HEROKU_APP_NAME}
+
 workflows:
   version: 2
   continuous-deploy:
     jobs:
       - build
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
