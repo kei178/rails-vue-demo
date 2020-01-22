@@ -30,9 +30,6 @@ RUN bundle --version
 RUN gem install mysql2 --source 'https://rubygems.org/'
 RUN bundle install
 
-# To solve: `Webpacker can't find application in /rails-vue-demo/public/packs/manifest.json`
-RUN yarn add @rails/webpacker && bundle update webpacker
-
 ADD . $APP_HOME
 
 EXPOSE 3000

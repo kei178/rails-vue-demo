@@ -6,6 +6,7 @@ release:
   image: web
   command:
     - bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
+    - yarn install
     - bundle exec rails assets:precompile
 
 run:
