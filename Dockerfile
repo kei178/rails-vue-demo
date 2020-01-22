@@ -32,6 +32,6 @@ RUN bundle install
 
 ADD . $APP_HOME
 
-RUN RAILS_ENV=production bundle exec rake webpacker:compile
+RUN RAILS_ENV=production SECRET_KEY_BASE=$(rake secret) bundle exec rake webpacker:compile
 
 EXPOSE 3000
