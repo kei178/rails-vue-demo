@@ -7,5 +7,7 @@ release:
   command:
     - bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
     - bundle exec rails assets:precompile
+    # To solve: Errno::ENOENT: No such file or directory @ rb_sysopen - tmp/pids/server.pid
+    - mkdir tmp && mkdir tmp/pids
 run:
-  web: bundle exec rails s -p 3000 -b '0.0.0.0'
+  web: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-production}
