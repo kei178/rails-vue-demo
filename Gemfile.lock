@@ -50,8 +50,6 @@ GEM
       activemodel (= 5.2.4.1)
       activesupport (= 5.2.4.1)
       arel (>= 9.0)
-    activerecord-mysql2-adapter (0.0.3)
-      mysql2
     activestorage (5.2.4.1)
       actionpack (= 5.2.4.1)
       activerecord (= 5.2.4.1)
@@ -241,7 +239,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-mysql2-adapter
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
