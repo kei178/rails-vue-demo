@@ -1,12 +1,13 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    RAILS_ENV: production
 
 release:
   image: web
   command:
     - RAILS_ENV=production bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate    
-    - RAILS_ENV=production bundle exec rake assets:precompile
 
 run:
   web: bundle exec rails s -p $PORT -b '0.0.0.0'

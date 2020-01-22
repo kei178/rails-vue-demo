@@ -32,4 +32,7 @@ RUN bundle install
 
 ADD . $APP_HOME
 
+# For the heroku deployment
+RUN if [ "$RAILS_ENV" = "production" ]; then SECRET_KEY_BASE=$(rake secret) bundle exec rake assets:precompile; fi
+
 EXPOSE 3000
