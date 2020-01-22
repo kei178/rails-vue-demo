@@ -8,10 +8,10 @@ release:
   image: web
   command:
     - RAILS_ENV=production bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate    
+    - yarn install
 
 run:
   web: 
     command:
-      - yarn install
       - RAILS_ENV=production bundle exec rake assets:precompile assets:clean
       - bundle exec rails s -p $PORT -b '0.0.0.0'
