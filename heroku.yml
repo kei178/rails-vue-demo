@@ -8,6 +8,7 @@ release:
     - bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
     - yarn install
     - bundle exec rails assets:precompile
+    - bundle exec rails webpacker:compile
 
 run:
   web: bundle exec rails s -p $PORT -b '0.0.0.0'
