@@ -6,10 +6,11 @@ release:
   image: web
   command:
     - bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate    
+    - bundle exec rails assets:precompile
 
 run:
   web: 
     command:
       - yarn install
-      - bundle exec rails assets:precompile
+      - rake assets:precompile
       - bundle exec rails s -p $PORT -b '0.0.0.0'
