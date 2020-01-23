@@ -18,11 +18,12 @@ EOF
 # Add heroku.com to the list of known hosts
 ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 
+# Login
+heroku login
+
 # Setting for Heroku container 
 heroku stack:set container --app ${HEROKU_APP_NAME}
 
-# git config
-git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
-
 # Setting for Heroku git
+# git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
 heroku git:remote -a ${HEROKU_APP_NAME}
