@@ -22,5 +22,4 @@ ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 heroku stack:set container --app ${HEROKU_APP_NAME}
 
 # Setting for Heroku git
-heroku create --ssh-git
-heroku git:remote -a ${HEROKU_APP_NAME}
+heroku git:remote -a ${HEROKU_APP_NAME} --ssh-git

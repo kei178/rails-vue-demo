@@ -29,7 +29,7 @@ jobs:
           command: heroku maintenance:on --app ${HEROKU_APP_NAME}
       - run: 
           name: build and release heroku container
-          command: git push heroku master
+          command: git push heroku master --ssh-git
       - run:
           name: heroku maintenance off
           command: heroku maintenance:off --app ${HEROKU_APP_NAME}
