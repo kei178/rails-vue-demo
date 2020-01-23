@@ -29,13 +29,13 @@ jobs:
           command: heroku apps:info --app ${HEROKU_APP_NAME}
       - run: 
           name: heroku maintenance on
-          command: heroku maintenance:on
+          command: heroku maintenance:on --app ${HEROKU_APP_NAME}
       - run: 
           name: build and release heroku container
           command: heroku stack:set container && git push heroku master
       - run:
           name: heroku maintenance off
-          command: heroku maintenance:off
+          command: heroku maintenance:off --app ${HEROKU_APP_NAME}
 
 workflows:
   version: 2
