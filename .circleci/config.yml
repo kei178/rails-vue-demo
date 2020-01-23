@@ -26,7 +26,7 @@ jobs:
           command: bash .circleci/setup_heroku.sh
       - run:
           name: specify heroku app
-          command: heroku apps:info --app ${HEROKU_APP_NAME} && heroku stack:set container --app ${HEROKU_APP_NAME}
+          command: heroku stack:set container --app ${HEROKU_APP_NAME} && heroku git:remote -a ${HEROKU_APP_NAME}
       - run: 
           name: heroku maintenance on
           command: heroku maintenance:on --app ${HEROKU_APP_NAME}
