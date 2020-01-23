@@ -17,3 +17,10 @@ EOF
 
 # Add heroku.com to the list of known hosts
 ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
+
+# Setting for Heroku container 
+heroku stack:set container --app ${HEROKU_APP_NAME}
+
+# Setting for Heroku git
+heroku create --ssh-git
+heroku git:remote -a ${HEROKU_APP_NAME}
