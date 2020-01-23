@@ -32,9 +32,7 @@ jobs:
           command: heroku maintenance:on
       - run: 
           name: build and release heroku container
-          command: 
-            - heroku stack:set container
-            - git push heroku master
+          command: heroku stack:set container && git push heroku master
       - run:
           name: heroku maintenance off
           command: heroku maintenance:off
