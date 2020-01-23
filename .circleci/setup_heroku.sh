@@ -22,9 +22,7 @@ ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 heroku stack:set container --app ${HEROKU_APP_NAME}
 
 # git config
-# XXX Add checkout SSH keys from `Authorize with GitHub` on the CircleCI settings
-git config user.email ${GIT_USER_EMAIL}
-git config user.name ${GIT_USER_NAME}
+git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
 
 # Setting for Heroku git
-heroku git:remote -a ${HEROKU_APP_NAME} --ssh-git
+heroku git:remote -a ${HEROKU_APP_NAME}
