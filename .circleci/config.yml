@@ -31,13 +31,8 @@ jobs:
           name: heroku maintenance on
           command: heroku maintenance:on --web ${HEROKU_APP_NAME}
       - run: 
-          name: push container
-          command: |
-            heroku container:push web
-            heroku container:release web
-      - run:
-          name: start server
-          command: heroku run ./bin/serve
+          name: build and release heroku container
+          command: git push heroku master
       - run:
           name: heroku maintenance off
           command: heroku maintenance:off --web ${HEROKU_APP_NAME}
