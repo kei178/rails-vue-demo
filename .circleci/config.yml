@@ -1,12 +1,9 @@
-version: 2.1
+version: 2
 
-executors:
-  my-executor:
-    machine:
-      - image: circleci/classic:edge
 jobs:
   build:
-    machine: my-executor 
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
       - run:
@@ -20,10 +17,10 @@ jobs:
           command: docker-compose down
 
   deploy:
-    machine: my-executor
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-      - run: docker ps
       - run:
           name: setup heroku command
           command: bash .circleci/setup_heroku.sh
