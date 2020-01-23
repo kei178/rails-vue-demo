@@ -32,6 +32,6 @@ RUN bundle install
 
 ADD . $APP_HOME
 
-RUN if [ "$RAILS_ENV" = "production" ]; then yarn install && RAILS_ENV=production SECRET_KEY_BASE=$(rake secret) bundle exec rake webpacker:compile; fi
+RUN if [ $HEROKU_SETUP_ENABLED = "true" ]; then yarn install && RAILS_ENV=production SECRET_KEY_BASE=$(rake secret) bundle exec rake webpacker:compile; fi
 
 EXPOSE 3000
