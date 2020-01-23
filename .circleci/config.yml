@@ -24,15 +24,20 @@ jobs:
       - run:
           name: setup heroku command
           command: bash .circleci/setup_heroku.sh
+      - run:
+          name: specify heroku app
+          command: heroku apps:info --app ${HEROKU_APP_NAME}
       - run: 
           name: heroku maintenance on
-          command: heroku maintenance:on --web ${HEROKU_APP_NAME}
+          command: heroku maintenance:on
       - run: 
           name: build and release heroku container
-          command: git push heroku master
+          command: 
+            - heroku stack:set container
+            - git push heroku master
       - run:
           name: heroku maintenance off
-          command: heroku maintenance:off --web ${HEROKU_APP_NAME}
+          command: heroku maintenance:off
 
 workflows:
   version: 2
