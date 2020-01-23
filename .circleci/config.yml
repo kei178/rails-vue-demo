@@ -36,12 +36,12 @@ jobs:
 
 workflows:
   version: 2
-  continuous-deploy:
+  build_and_deploy:
     jobs:
       - build
       - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
