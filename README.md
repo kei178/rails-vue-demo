@@ -7,10 +7,11 @@ A dockerlized demo app with Rails and Vue.js.
 - [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
+- [Heroku CLI](https://devcenter.heroku.com/categories/command-line)
 
 ## Development
 
-Puma + Webpack Dev Server + MySQL
+Puma + Webpack Dev Server + MySQL 
 
 ### Run
 
@@ -40,7 +41,7 @@ With the running app service:
 docker-compose exec app ./bin/rspec
 ```
 
-## Production Mock
+## Production Mock (Precompile + Nginx)
 
 Puma + Nginx + MySQL
 
@@ -63,3 +64,18 @@ docker-compose -f docker-compose-prod.yml up --build
 ```
 docker-compose down
 ```
+
+## Deployment to Heroku
+
+### CLI
+
+Deployment from your local PC With heroku.yml.
+
+```
+git push heroku master
+```
+
+### CircleCI (CI/CD)
+
+It will be deployed via CircleCI when the master branch is updated in GitHub.
+
