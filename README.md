@@ -69,7 +69,7 @@ docker-compose down
 
 ### CLI
 
-Deployment from your local PC With heroku.yml.
+Deployment from your local PC with heroku.yml.
 
 ```
 git push heroku master
